@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+      Daily List  
+    {% endblock title %}
+{% block body  %}
+<div class="container1 mb-3">
+  <form action="/" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label" >Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">ToDo description</label>
+        <input type="text" class="form-control" id="desc" name="desc">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+    
+    <div class="container2 my-3">
+        <h2>My ToDo</h2>
+      {% if allTodo|length == 0 %}
+      <div class="alert alert-primary" role="alert">
+       Opps! it's empty.Add a Task 
+      </div>
+            
+          
+      {% else %}
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Desc</th>
+                <th scope="col">Time</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            
+                {%for todo in allTodo %}
+              <tbody>
+              <tr>
+                <!-- we are using loop.index inplace of todo.sno because if
+                  we del a row then the no shouldn't be delteled -->
+                <td>{{loop.index}}</td> 
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
+                <td>{{todo.date_created}}</td>
+                <td><a href="/delete/{{todo.sno}}" type=button class="btn btn-danger btn-sm">Delete</a></td>
+                <td><a href="/update/{{todo.sno}}" type=button class="btn btn-success btn-sm">Update</a></td>
+
+              </tr>
+            </tbody>
+              {% endfor %}
+            
+          </table>
+      {% endif %}
+    </div>
+    
+{% endblock body %}
