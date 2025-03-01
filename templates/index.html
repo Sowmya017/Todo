@@ -5,6 +5,7 @@
 {% block body  %}
 <div class="container1 mb-3">
   <form action="/" method="POST">
+    <h3>Create a ToDo</h3>
       <div class="mb-3">
         <label for="title" class="form-label" >Title</label>
         <input type="text" class="form-control" id="title" name="title">
@@ -16,9 +17,10 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-    
+      
+    <h2 id="container2-h2">My ToDo</h2>
     <div class="container2 my-3">
-        <h2>My ToDo</h2>
+        
       {% if allTodo|length == 0 %}
       <div class="alert alert-primary" role="alert">
        Opps! it's empty.Add a Task 
@@ -27,14 +29,14 @@
           
       {% else %}
 
-        <table class="table">
+        <table class="table" >
             <thead>
               <tr>
-                <th scope="col">Sno</th>
-                <th scope="col">Title</th>
-                <th scope="col">Desc</th>
-                <th scope="col">Time</th>
-                <th scope="col">Actions</th>
+                <th scope="col" style="background-color:cadetblue;">Sno</th>
+                <th scope="col" style="background-color: cadetblue;">Title</th>
+                <th scope="col" style="background-color: cadetblue;">Desc</th>
+                <th scope="col" style="background-color: cadetblue;">Time</th>
+                <th scope="col" style="background-color: cadetblue;">Actions</th>
               </tr>
             </thead>
             
@@ -47,8 +49,13 @@
                 <td>{{todo.title}}</td>
                 <td>{{todo.desc}}</td>
                 <td>{{todo.date_created}}</td>
-                <td><a href="/delete/{{todo.sno}}" type=button class="btn btn-danger btn-sm">Delete</a></td>
-                <td><a href="/update/{{todo.sno}}" type=button class="btn btn-success btn-sm">Update</a></td>
+                <td>
+                  <div class="d-flex gap-1"> <!-- Flexbox layout with small gap -->
+                      <a href="/delete/{{todo.sno}}" class="btn btn-danger btn-sm">Delete</a>
+                      <a href="/update/{{todo.sno}}" class="btn btn-success btn-sm">Update</a>
+                  </div>
+              </td>
+              
 
               </tr>
             </tbody>

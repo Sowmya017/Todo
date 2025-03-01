@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request,redirect,flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -40,8 +40,8 @@ def delete(sno):
 @app.route('/update/<int:sno>',methods=['GET','POST'])
 def update(sno):
     if request.method == "POST":
-        title=request.form['title']
-        desc=request.form['desc']
+        title=request.form['title'].strip()
+        desc=request.form['desc'].strip()
         Todo=todo.query.filter_by(sno=sno).first()
         Todo.title=title
         Todo.desc=desc
